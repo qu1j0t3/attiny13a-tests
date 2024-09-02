@@ -1,0 +1,195 @@
+ *  Executing task: platformio run --target upload --environment tiny13a
+
+Processing tiny13a (platform: atmelavr; board: attiny13a)
+----------------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/atmelavr/attiny13a.html
+PLATFORM: Atmel AVR (5.0.0) > ATtiny13A
+HARDWARE: ATTINY13A 9MHz, 64B RAM, 1KB Flash
+DEBUG: Current (simavr) External (simavr)
+PACKAGES:
+ - tool-avrdude @ 1.70200.0 (7.2.0)
+ - toolchain-atmelavr @ 1.70300.191015 (7.3.0)
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 0 compatible libraries
+Scanning dependencies...
+No dependencies
+Building in release mode
+Compiling .pio/build/tiny13a/src/main.o
+GAS LISTING /var/folders/pk/8lqshrw948jgr0m63qpr2rvh0000gp/T//ccLO6jPw.s               page 1
+
+
+   1                            .file   "main.c"
+   2                    __SP_L__ = 0x3d
+   3                    __SREG__ = 0x3f
+   4                    __tmp_reg__ = 0
+   5                    __zero_reg__ = 1
+   6                     ;  GNU C11 (GCC) version 7.3.0 (avr)
+   7                     ;      compiled by GNU C version 4.2.1 Compatible Apple LLVM 8.1.0 (clang-802.0.38), GMP version 5.0.2
+   8                     ;  GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+   9                     ;  options passed:  -I src -imultilib avr25/tiny-stack
+  10                     ;  -iprefix /Users/Toby/.platformio/packages/toolchain-atmelavr/bin/../lib/gcc/avr/7.3.0/
+  11                     ;  -D__AVR_ATtiny13A__ -D__AVR_DEVICE_NAME__=attiny13a -D F_CPU=9600000L
+  12                     ;  -D PLATFORMIO=60115 -D ARDUINO_AVR_ATTINY13 src/main.c -mn-flash=1
+  13                     ;  -mno-skip-bug -mmcu=avr25 -msp8
+  14                     ;  -auxbase-strip .pio/build/tiny13a/src/main.o -Os -Os -Werror -Wall
+  15                     ;  -Wextra -std=gnu11 -fno-fat-lto-objects -ffunction-sections
+  16                     ;  -fdata-sections -fno-lto -fverbose-asm
+  17                     ;  options enabled:  -Wmisspelled-isr -faggressive-loop-optimizations
+  18                     ;  -falign-functions -falign-jumps -falign-labels -falign-loops
+  19                     ;  -fauto-inc-dec -fbranch-count-reg -fchkp-check-incomplete-type
+  20                     ;  -fchkp-check-read -fchkp-check-write -fchkp-instrument-calls
+  21                     ;  -fchkp-narrow-bounds -fchkp-optimize -fchkp-store-bounds
+  22                     ;  -fchkp-use-static-bounds -fchkp-use-static-const-bounds
+  23                     ;  -fchkp-use-wrappers -fcode-hoisting -fcombine-stack-adjustments
+  24                     ;  -fcommon -fcompare-elim -fcprop-registers -fcrossjumping
+  25                     ;  -fcse-follow-jumps -fdata-sections -fdefer-pop -fdevirtualize
+  26                     ;  -fdevirtualize-speculatively -fdwarf2-cfi-asm -fearly-inlining
+  27                     ;  -feliminate-unused-debug-types -fexpensive-optimizations
+  28                     ;  -fforward-propagate -ffp-int-builtin-inexact -ffunction-cse
+  29                     ;  -ffunction-sections -fgcse -fgcse-lm -fgnu-runtime -fgnu-unique
+  30                     ;  -fguess-branch-probability -fhoist-adjacent-loads -fident
+  31                     ;  -fif-conversion -fif-conversion2 -findirect-inlining -finline
+  32                     ;  -finline-atomics -finline-functions -finline-functions-called-once
+  33                     ;  -finline-small-functions -fipa-bit-cp -fipa-cp -fipa-icf
+  34                     ;  -fipa-icf-functions -fipa-icf-variables -fipa-profile -fipa-pure-const
+  35                     ;  -fipa-ra -fipa-reference -fipa-sra -fipa-vrp -fira-hoist-pressure
+  36                     ;  -fira-share-save-slots -fira-share-spill-slots
+  37                     ;  -fisolate-erroneous-paths-dereference -fivopts -fkeep-static-consts
+  38                     ;  -fleading-underscore -flifetime-dse -flra-remat -flto-odr-type-merging
+  39                     ;  -fmath-errno -fmerge-constants -fmerge-debug-strings
+  40                     ;  -fmove-loop-invariants -fomit-frame-pointer -foptimize-sibling-calls
+  41                     ;  -fpartial-inlining -fpeephole -fpeephole2 -fplt -fprefetch-loop-arrays
+  42                     ;  -freg-struct-return -freorder-blocks -freorder-functions
+  43                     ;  -frerun-cse-after-loop -fsched-critical-path-heuristic
+  44                     ;  -fsched-dep-count-heuristic -fsched-group-heuristic -fsched-interblock
+  45                     ;  -fsched-last-insn-heuristic -fsched-rank-heuristic -fsched-spec
+  46                     ;  -fsched-spec-insn-heuristic -fsched-stalled-insns-dep -fschedule-fusion
+  47                     ;  -fsemantic-interposition -fshow-column -fshrink-wrap
+  48                     ;  -fshrink-wrap-separate -fsigned-zeros -fsplit-ivs-in-unroller
+  49                     ;  -fsplit-wide-types -fssa-backprop -fssa-phiopt -fstdarg-opt
+  50                     ;  -fstore-merging -fstrict-aliasing -fstrict-overflow
+  51                     ;  -fstrict-volatile-bitfields -fsync-libcalls -fthread-jumps
+  52                     ;  -ftoplevel-reorder -ftrapping-math -ftree-bit-ccp
+  53                     ;  -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-coalesce-vars
+  54                     ;  -ftree-copy-prop -ftree-dce -ftree-dominator-opts -ftree-dse
+  55                     ;  -ftree-forwprop -ftree-fre -ftree-loop-if-convert -ftree-loop-im
+  56                     ;  -ftree-loop-ivcanon -ftree-loop-optimize -ftree-parallelize-loops=
+  57                     ;  -ftree-phiprop -ftree-pre -ftree-pta -ftree-reassoc -ftree-scev-cprop
+
+GAS LISTING /var/folders/pk/8lqshrw948jgr0m63qpr2rvh0000gp/T//ccLO6jPw.s               page 2
+
+
+  58                     ;  -ftree-sink -ftree-slsr -ftree-sra -ftree-switch-conversion
+  59                     ;  -ftree-tail-merge -ftree-ter -ftree-vrp -funit-at-a-time -fverbose-asm
+  60                     ;  -fzero-initialized-in-bss -msp8
+  61
+  62                            .text
+  63                            .section        .text.startup.main,"ax",@progbits
+  64                    .global main
+  65                            .type   main, @function
+  66                    main:
+  67                    /* prologue: function */
+  68                    /* frame size = 0 */
+  69                    /* stack size = 0 */
+  70                    .L__stack_usage = 0
+  71                     ;  src/main.c:10: }
+  72 0000 90E0                  ldi r25,0        ;
+  73 0002 80E0                  ldi r24,0        ;
+  74                    /* epilogue start */
+  75 0004 0895                  ret
+  76                            .size   main, .-main
+  77                            .ident  "GCC: (GNU) 7.3.0"
+
+GAS LISTING /var/folders/pk/8lqshrw948jgr0m63qpr2rvh0000gp/T//ccLO6jPw.s               page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+/var/folders/pk/8lqshrw948jgr0m63qpr2rvh0000gp/T//ccLO6jPw.s:2      *ABS*:000000000000003d __SP_L__
+/var/folders/pk/8lqshrw948jgr0m63qpr2rvh0000gp/T//ccLO6jPw.s:3      *ABS*:000000000000003f __SREG__
+/var/folders/pk/8lqshrw948jgr0m63qpr2rvh0000gp/T//ccLO6jPw.s:4      *ABS*:0000000000000000 __tmp_reg__
+/var/folders/pk/8lqshrw948jgr0m63qpr2rvh0000gp/T//ccLO6jPw.s:5      *ABS*:0000000000000001 __zero_reg__
+/var/folders/pk/8lqshrw948jgr0m63qpr2rvh0000gp/T//ccLO6jPw.s:66     .text.startup.main:0000000000000000 main
+
+NO UNDEFINED SYMBOLS
+Linking .pio/build/tiny13a/firmware.elf
+Checking size .pio/build/tiny13a/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [          ]   0.0% (used 0 bytes from 64 bytes)
+Flash: [          ]   4.3% (used 44 bytes from 1024 bytes)
+Building .pio/build/tiny13a/firmware.hex
+Configuring upload protocol...
+AVAILABLE: avrispv2
+CURRENT: upload_protocol = avrispv2
+Looking for upload port...
+Using manually specified: /dev/cu.usbmodem001432501
+Uploading .pio/build/tiny13a/firmware.hex
+
+avrdude: Version 7.2-arduino.1
+         Copyright the AVRDUDE authors;
+         see https://github.com/avrdudes/avrdude/blob/main/AUTHORS
+
+         System wide configuration file is /Users/Toby/.platformio/packages/tool-avrdude/avrdude.conf
+         User configuration file is /Users/Toby/.avrduderc
+         User configuration file does not exist or is not a regular file, skipping
+
+         Using Port                    : /dev/cu.usbmodem001432501
+         Using Programmer              : avrispv2
+         Overriding Baud Rate          : 38400
+         Setting bit clk period        : 10.0
+         AVR Part                      : ATtiny13A
+         Chip Erase delay              : 4000 us
+         RESET disposition             : dedicated
+         RETRY pulse                   : SCK
+         Serial program mode           : yes
+         Parallel program mode         : yes
+         Timeout                       : 200
+         StabDelay                     : 100
+         CmdexeDelay                   : 25
+         SyncLoops                     : 32
+         PollIndex                     : 3
+         PollValue                     : 0x53
+         Memory Detail                 :
+
+                                           Block Poll               Page                       Polled
+           Memory Type Alias    Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- -------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           eeprom                 65     5     4    0 no         64    4      0  4000  4000 0x00 0x00
+           flash                  65    10    32    0 yes      1024   32     32  4500  4500 0x00 0x00
+           lfuse                   0     0     0    0 no          1    1      0  4500  4500 0x00 0x00
+           hfuse                   0     0     0    0 no          1    1      0  4500  4500 0x00 0x00
+           lock                    0     0     0    0 no          1    1      0  4500  4500 0x00 0x00
+           signature               0     0     0    0 no          3    1      0     0     0 0x00 0x00
+           calibration             0     0     0    0 no          2    1      0     0     0 0x00 0x00
+
+         Programmer Type : STK500V2
+         Description     : Atmel AVR ISP v2
+         Programmer Model: STK500
+         Hardware Version: 15
+         Firmware Version Controller : 2.10
+         Topcard         : Unknown
+         Vtarget         : 4.7 V
+         SCK period      : 17.4 us
+         Varef           : 0.0 V
+         Oscillator      : 3.686 MHz
+avrdude: AVR device initialized and ready to accept instructions
+avrdude: device signature = 0x1e9007 (probably t13a)
+avrdude: erasing chip
+
+avrdude: processing -U flash:w:.pio/build/tiny13a/firmware.hex:i
+avrdude: reading input file .pio/build/tiny13a/firmware.hex for flash
+         with 44 bytes in 1 section within [0, 0x2b]
+         using 2 pages and 20 pad bytes
+avrdude: writing 44 bytes flash ...
+Writing | ################################################## | 100% 0.03s
+avrdude: 44 bytes of flash written
+avrdude: verifying flash memory against .pio/build/tiny13a/firmware.hex
+Reading | ################################################## | 100% 0.01s
+avrdude: 44 bytes of flash verified
+
+avrdude done.  Thank you.
+
+============================= [SUCCESS] Took 2.45 seconds =============================
+ *  Terminal will be reused by tasks, press any key to close it.
