@@ -62,13 +62,14 @@ static volatile uint8_t state = IDLE;
  * Set to correct prescale ratio for the desired baud rate
  * according to calibration test.
  */
-uint8_t prescale = PRESCALE_BY_8;
+static const uint8_t prescale = PRESCALE_BY_8;
 
 /**
  * Set to timer count for the desired baud rate
  * according to calibration test.
  */
-static const uint8_t count = 13; // This works for 128kHz clock with PRESCALE_BY_8
+// Measured on my chip: 114..124 = midpoint 119
+static const uint8_t count = 119; // 9.6MHz system clock, PRESCALE_BY_8
 
 void serial_timer_init() {
     DDRB |= RXMASK;
