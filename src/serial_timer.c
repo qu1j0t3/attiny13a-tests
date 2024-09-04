@@ -58,18 +58,29 @@ static volatile uint8_t state = IDLE;
 // Calibration is done by running "chirp" test (serial_timer_delay_test()),
 // and taking midpoint of first and last uncorrupted timer values received.
 
+/*
+        Baud  Prescale    Computed  Measured on my chip
+                             count  Range    Midpoint Count
+         110  PRESCALE_BY_256  125  125..137 = 131
+         300  PRESCALE_BY_256  125  115..125 = 120
+        1200  PRESCALE_BY_64   125  115..125 = 120
+        9600  PRESCALE_BY_8    125  114..124 = 119
+       76800  NO_PRESCALE      125  110..121 = 115
+      115200  NO_PRESCALE       83  72..79   = 75
+      230400  NO_PRESCALE       42  does not work
+ */
+
 /**
  * Set to correct prescale ratio for the desired baud rate
  * according to calibration test.
  */
-static const uint8_t prescale = PRESCALE_BY_8;
+static const uint8_t prescale = NO_PRESCALE;
 
 /**
  * Set to timer count for the desired baud rate
  * according to calibration test.
  */
-// Measured on my chip: 114..124 = midpoint 119
-static const uint8_t count = 119; // 9.6MHz system clock, PRESCALE_BY_8
+static const uint8_t count = 75;
 
 void serial_timer_init() {
     DDRB |= RXMASK;
@@ -147,6 +158,7 @@ void serial_timer_delay_test() {
 
    for(uint8_t d = 1; d; ++d){
       OCR0A = d; // Update timer interrupt frequency
+      _delay_ms(1);
 
       sendt('.'); sendt('o'); sendt('O'); sendt('(');
       sendt('0'+((d/100)%10));

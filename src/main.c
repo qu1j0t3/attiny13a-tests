@@ -17,6 +17,8 @@ int main() {
 
   _delay_ms(10);
 
+  //serial_timer_delay_test();
+
 while(1){
   sendt('O');
   sendt('K');
@@ -24,11 +26,6 @@ while(1){
   sendt('\r');
   sendt('\n');
   _delay_ms(500);
-}
-
-while(1){
-  serial_timer_delay_test();
-  _delay_ms(10);
 }
 
   return EXIT_SUCCESS;
