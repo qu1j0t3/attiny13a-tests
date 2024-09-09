@@ -59,15 +59,15 @@ static volatile uint8_t state = IDLE;
 // and taking midpoint of first and last uncorrupted timer values received.
 
 /*
-        Baud  Prescale    Computed  Measured on my chip
+        Baud  Prescale    Computed  Measured on my chip using Polulu serial
                              count  Range    Midpoint Count
          110  PRESCALE_BY_256  125  125..137 = 131
-         300  PRESCALE_BY_256  125  115..125 = 120
+         300  PRESCALE_BY_256  125  114..125 = 119
         1200  PRESCALE_BY_64   125  115..125 = 120
-        9600  PRESCALE_BY_8    125  114..124 = 119
-       76800  NO_PRESCALE      125  110..121 = 115
-      115200  NO_PRESCALE       83  72..79   = 75
-      230400  NO_PRESCALE       42  does not work
+        9600  PRESCALE_BY_8    125  113..125 = 119
+       76800  NO_PRESCALE      125  110..122 = 116
+      115200  NO_PRESCALE       83  73..80   = 76
+      230400  NO_PRESCALE       42  does not work - not supported by Polulu
  */
 
 /**
@@ -80,7 +80,7 @@ static const uint8_t prescale = NO_PRESCALE;
  * Set to timer count for the desired baud rate
  * according to calibration test.
  */
-static const uint8_t count = 75;
+static const uint8_t count = 76;
 
 void serial_timer_init() {
     DDRB |= RXMASK;
@@ -97,28 +97,39 @@ void serial_timer_init() {
 }
 
 ISR(TIM0_COMPA_vect) {
-    if (state < IDLE) {
-        // Transmit the stop bit or next data bit
-        if (state >= STOP_BIT || (data & 1)) {
-            SERIAL_HI();
-        } else {
-            SERIAL_LO();
-        }
+    // on entry, state is the bit number to be sent,
+    // or SENDING_STOP for the stop bit, or IDLE for no activity
 
-        ++state;
-        data >>= 1;
-    } else if (! INT_ALWAYS) {
-        TIMSK0 &= ~(1 << TOIE0); // transmit done. disable timer interrupt
+    if (state == IDLE) {
+        return;
     }
+
+    // Transmit the next data bit, or stop bit
+    if (data & 1) {
+        SERIAL_HI();
+    } else {
+        SERIAL_LO();
+    }
+
+    ++state; // set state for next interrupt
+
+    if (state < STOP_BIT) {
+      data >>= 1;
+    } else if (state == STOP_BIT) {
+      data = 1;
+    } /*else if (state == IDLE) {
+      // TODO: set up for next byte, if available in buffer
+      TIMSK0 &= ~(1 << OCIE0A); // disable interrupt during idle
+    }*/
 }
 
 /**
  * Wait until serial communication is finished
- * and line is idle. At this point the timer interrupt
- * will be disabled.
+ * and line is idle.
  */
 void flush_serial() {
-    while (/*(TIMSK & (1 << TOIE1)) &&*/ state != IDLE)
+    // don't wait if the interrupt is disabled
+    while ((TIMSK0 & (1 << OCIE0A)) && state < IDLE)
         ;
 }
 
@@ -138,9 +149,9 @@ void sendt(uint8_t c) {
     TCNT0 = 0;   // start counting a full bit interval
     SERIAL_LO(); // begin the start bit
     data = c;    // bits of `data` follow,
-    state = 0;   // bit zero is next
+    state = 0;   // starting at bit zero
 
-    if (! INT_ALWAYS) TIMSK0 |= 1 << TOIE0; // enable timer interrupt
+    TIMSK0 |= 1 << OCIE0A; // enable timer interrupt
 }
 
 void sendnum(char marker, uint8_t err) {
@@ -166,6 +177,8 @@ void serial_timer_delay_test() {
       sendt('0'+(d%10));
       sendt(')');
       sendt('\r'); sendt('\n');
+
+      flush_serial();
    }
 
    OCR0A = count; // reset to configured value
